@@ -163,8 +163,8 @@ class TestSeedGenerator(unittest.TestCase):
         seed_generator_a = SeedGenerator(self.seed)
         seed_generator_a.seed_random_function = mock_random_seed_function
 
-        print seed_generator_a.request_seed()
-        print seed_generator_a.seeds
+        print(seed_generator_a.request_seed())
+        print(seed_generator_a.seeds)
         self.assertRaises(ValueError, seed_generator_a.request_seed)
 
         seed_generator_a = SeedGenerator(self.seed)
@@ -216,7 +216,7 @@ class TestModel(unittest.TestCase):
 
         #Test Regional Property Addition
         model.add_regional_property("MockRegionalProperty", RegionalProperty)
-        for region_name, region in model.regions.iteritems():
+        for region_name, region in model.regions.items():
             self.assertEqual(len(region.properties), 2)
 
         # Test filling a model
@@ -230,23 +230,23 @@ class TestModel(unittest.TestCase):
         model.add_property(mock_random_property_a)
 
         model.add_defined_properties_to_regions()
-        for key, region in model.regions.iteritems():
+        for key, region in model.regions.items():
             self.assertEqual(len(region.properties), 1)
 
         mock_random_property_b = MockRandomProperty(seed_generator=MockSeedGenerator(self.seed - 1),
                                                     name="MockRandomPropertyB")
         model.add_property(mock_random_property_b)
 
-        for region_name, region in model.regions.iteritems():
+        for region_name, region in model.regions.items():
             self.assertEqual(len(region.properties), 1)
 
         mock_region_b = MockRegion(name="MockRegionB")
 
         model.add_region(mock_region_b)
         model.add_defined_properties_to_regions()
-        for region_name_a, region_a in model.regions.iteritems():
-            for region_name_b, region_b in model.regions.iteritems():
-                for property_name, property in model.properties.iteritems():
+        for region_name_a, region_a in model.regions.items():
+            for region_name_b, region_b in model.regions.items():
+                for property_name, property in model.properties.items():
                     self.assertNotEqual(model.properties[property_name], region_a.properties[property_name])
                     if region_a is not region_b:
                         self.assertNotEqual(region_a.properties[property_name], region_b.properties[property_name])
@@ -273,8 +273,8 @@ class TestModel(unittest.TestCase):
         model.add_region(mock_region_a)
         model.run(config)
 
-        for region_name, region in model.regions.iteritems():
-            for property_name, property in region.properties.iteritems():
+        for region_name, region in model.regions.items():
+            for property_name, property in region.properties.items():
                 self.assertEqual(len(property.values), 10)
 
     def tearDown(self):
@@ -319,7 +319,7 @@ class TestOilInPlaceCalculation(unittest.TestCase):
         model.run(config)
 
         model.add_regional_property("ooip", OriginalOilInPlace)
-        for region_name, region in model.regions.iteritems():
+        for region_name, region in model.regions.items():
             if region_name is "Region A":
                 self.assertAlmostEqual(np.sum(region.properties["ooip"].values), n*0.9, 4)
 

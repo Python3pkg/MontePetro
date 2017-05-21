@@ -10,7 +10,7 @@ class Region(object):
         self.properties = {}
 
     def add_property(self, prop):
-        if prop.name in self.properties.keys():
+        if prop.name in list(self.properties.keys()):
             logging.log(logging.ERROR,
                         "Encountered duplicate property" + str(prop.name) + " in region " + str(self.name) + ".")
             raise KeyError

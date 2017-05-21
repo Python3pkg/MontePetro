@@ -76,7 +76,7 @@ class ModelOriginalOilInPlace(RegionalProperty):
 
     def calculation(self):
         ooips = []
-        for region_name, region in self.model.regions.iteritems():
+        for region_name, region in self.model.regions.items():
             ooips.append(region.properties["ooip"].values)
 
         # assumes len(arrlist) > 0

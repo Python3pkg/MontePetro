@@ -45,7 +45,7 @@ class JSONParser(object):
                 valid = False
                 logging.log(logging.WARNING, "No Properties defined.")
         except KeyError:
-            print "No attribute Properties in configuration file."
+            print("No attribute Properties in configuration file.")
             valid = False
 
         try:
